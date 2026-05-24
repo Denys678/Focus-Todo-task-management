@@ -1,0 +1,26 @@
+.timer-display {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+
+  padding: 1rem;
+
+  text-align: center;
+
+  border: 0.1rem solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.timer-display h2 {
+  font-size: 3.2rem;
+  color: var(--color-text-main);
+}
+
+.timer-display p {
+  font-size: 5.2rem;
+  font-weight: 700;
+  letter-spacing: 0.3rem;
+  color: var(--color-text-main);
+}
