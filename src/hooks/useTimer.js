@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 export function useTimer(initialTime = 60) {
   const [count, setCount] = useState(initialTime);
+  const [selectedTime, setSelectedTime] = useState(initialTime);
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
@@ -37,11 +38,12 @@ export function useTimer(initialTime = 60) {
 
   const resetTimer = () => {
     setIsRunning(false);
-    setCount(initialTime);
+    setCount(selectedTime);
   };
 
   const selectTimer = (seconds) => {
     setIsRunning(false);
+    setSelectedTime(seconds);
     setCount(seconds);
   };
 
