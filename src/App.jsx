@@ -1,4 +1,5 @@
 import Header from "./layouts/Header";
+import Footer from "./layouts/Footer";
 
 import TaskInput from "./components/todo/TaskInput";
 import SearchInput from "./components/todo/SearchInput";
@@ -82,6 +83,8 @@ function App() {
           <TimerControls startTimer={startTimer} stopTimer={stopTimer} resetTimer={resetTimer} />
         </section>
       </main>
+
+      <Footer />
     </div>
   );
 }
