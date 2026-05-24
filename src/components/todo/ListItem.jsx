@@ -15,7 +15,7 @@ function ListItem({ item,
         {isEditing ? (
           <input className="form-input form-input-sm" value={editingText} onChange={(e) => setEditingText(e.target.value)} onClick={(e) => e.stopPropagation()} />
         ) : (
-          <span>{item.task}</span>
+          <span className="list-item-task">{item.task}</span>
         )}
       </div>
       
