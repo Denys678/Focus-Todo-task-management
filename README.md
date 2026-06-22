@@ -4,6 +4,8 @@ Focus Todo is a React-based task management app designed to help users organize 
 The project includes a local ToDo list, filtering, search, inline task editing, task completion status, and a simple focus timer.
 The main point of creating this app - is studying purposes.
 
+Live Demo: https://focus-todo-task-management.vercel.app/
+
 ## Features
 
 - Add new tasks
