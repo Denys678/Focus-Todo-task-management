@@ -3,24 +3,28 @@
 
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 0.8rem;
 
-  padding: 1rem;
+  padding: 1.4rem;
 
   text-align: center;
 
+  background-color: rgba(255, 255, 255, 0.55);
   border: 0.1rem solid var(--color-border);
   border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
 }
 
 .timer-display h2 {
-  font-size: 3.2rem;
+  font-size: 2.5rem;
+  line-height: 1;
   color: var(--color-text-main);
 }
 
 .timer-display p {
-  font-size: 5.2rem;
-  font-weight: 700;
-  letter-spacing: 0.3rem;
+  font-size: 4.4rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.18rem;
   color: var(--color-text-main);
 }

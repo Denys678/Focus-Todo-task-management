@@ -1,12 +1,36 @@
 import { AppError } from "../errors/AppError";
 import prisma from "../lib/prisma";
-import { CreateTodoInput, TodoIdParams, UpdatedTodo } from "../schemas/todo.schema";
+import { CreateTodoInput, TodoQuery, UpdatedTodo } from "../schemas/todo.schema";
 
-export async function getAllTodos() {
+export async function getAllTodos(query: TodoQuery) {
+    const { completed, priority, search, sortBy = "createdAt", order = "desc" } = query;
+
     const result = await prisma.todo.findMany({
+        where: {
+            ...(completed !== undefined ? { completed } : {}),
+            ...(priority ? { priority } : {}),
+            ...(search
+                ? {
+                    OR: [
+                        {
+                            title: {
+                                contains: search,
+                                mode: "insensitive",
+                            },
+                        },
+                        {
+                            description: {
+                                contains: search,
+                                mode: "insensitive",
+                            },
+                        },
+                    ],
+                }
+                : {}),
+        },
         orderBy: {
-            createdAt: "desc",
-        }
+            [sortBy]: order,
+        },
     });
 
     return result;

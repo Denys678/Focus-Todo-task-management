@@ -1,11 +1,13 @@
 import type { RequestHandler } from "express";
 import { getAllTodos, createTodoService, getTodoByIdService, deleteTodoByIdService, updateTodoByIdService } from "../services/todos.service";
 import { mapTodoToResponse, mapTodosToResponse } from "../mappers/todo.mapper";
-import { TodoIdParams, UpdatedTodo } from "../schemas/todo.schema";
+import { TodoIdParams, TodoQuery, UpdatedTodo } from "../schemas/todo.schema";
 import { AppError } from "../errors/AppError";
 
 export const getTodos: RequestHandler = async (_req, res) => {
-    const todos = await getAllTodos();
+    const query = res.locals.query as TodoQuery;
+
+    const todos = await getAllTodos(query);
 
     res.status(200).json(mapTodosToResponse(todos));
 };
