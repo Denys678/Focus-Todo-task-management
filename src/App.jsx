@@ -23,6 +23,12 @@ function App() {
     setSearch,
     filter,
     setFilter,
+    priorityFilter,
+    setPriorityFilter,
+    sortBy,
+    setSortBy,
+    order,
+    setOrder,
     filteredList,
     activeTaskCount,
     editingId,
@@ -35,6 +41,17 @@ function App() {
     editListItem,
     saveEditItem,
     cancelEditing,
+    dueDate,
+    setDueDate,
+    priority,
+    setPriority,
+    resetFilters,
+    editingPriority,
+    setEditingPriority,
+    editingDueDate,
+    setEditingDueDate,
+    isLoading,
+    error,
   } = useTodos();
 
   const { count, startTimer, stopTimer, resetTimer, selectTimer } =
@@ -46,7 +63,15 @@ function App() {
 
       <main className="todo-card">
         <section className="todo-section input-section">
-          <TaskInput text={text} setText={setText} />
+          <TaskInput
+            text={text}
+            setText={setText}
+            dueDate={dueDate}
+            setDueDate={setDueDate}
+            priority={priority}
+            setPriority={setPriority}
+            addInput={addInput}
+          />
 
           <p className="todo-meta">Length: {text.length}</p>
 
@@ -56,23 +81,43 @@ function App() {
         <section className="todo-section filter-controls-section">
           <SearchInput search={search} setSearch={setSearch} />
 
-          <ListControls filter={filter} setFilter={setFilter} />
+          <ListControls
+            filter={filter}
+            setFilter={setFilter}
+            priorityFilter={priorityFilter}
+            setPriorityFilter={setPriorityFilter}
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            order={order}
+            setOrder={setOrder}
+            resetFilters={resetFilters}
+          />
         </section>
 
         <section className="todo-section list-section">
           <p className="todo-meta">Active tasks: {activeTaskCount}</p>
 
-          <List
-            filteredList={filteredList}
-            deleteItem={deleteItem}
-            markTaskStatus={markTaskStatus}
-            editListItem={editListItem}
-            editingId={editingId}
-            editingText={editingText}
-            setEditingText={setEditingText}
-            saveEditItem={saveEditItem}
-            cancelEditing={cancelEditing}
-          />
+          {error && <p className="error-message">{error}</p>}
+
+          {isLoading ? (
+            <p className="loading-message">Loading tasks...</p>
+          ) : (
+            <List
+              filteredList={filteredList}
+              deleteItem={deleteItem}
+              markTaskStatus={markTaskStatus}
+              editListItem={editListItem}
+              editingId={editingId}
+              editingText={editingText}
+              setEditingText={setEditingText}
+              editingPriority={editingPriority}
+              setEditingPriority={setEditingPriority}
+              editingDueDate={editingDueDate}
+              setEditingDueDate={setEditingDueDate}
+              saveEditItem={saveEditItem}
+              cancelEditing={cancelEditing}
+            />
+          )}
         </section>
 
         <section className="todo-section timer-section">

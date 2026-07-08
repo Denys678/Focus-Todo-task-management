@@ -1,9 +1,12 @@
 .btn {
-  border: none;
-  border-radius: var(--radius-md);
+  min-height: 4rem;
+  padding: 0.9rem 1.8rem;
 
-  font-size: 1.6rem;
-  padding: 1.5rem 3rem;
+  border: 0.1rem solid transparent;
+  border-radius: var(--radius-sm);
+
+  font-size: 1.4rem;
+  font-weight: 700;
 
   cursor: pointer;
 
@@ -12,28 +15,32 @@
     box-shadow var(--transition-fast),
     background-color var(--transition-fast),
     border-color var(--transition-fast),
-    color var(--transition-fast);
+    color var(--transition-fast),
+    opacity var(--transition-fast);
 }
 
 .btn-primary {
   background-color: var(--color-primary);
+  border-color: var(--color-primary);
   color: var(--color-text-light);
 }
 
 .btn-secondary {
   background-color: var(--color-secondary-bg);
   color: var(--color-text-main);
-  border: 0.1rem solid var(--color-secondary-border);
+  border-color: var(--color-secondary-border);
 }
 
 .btn-danger {
   background-color: var(--color-danger);
+  border-color: var(--color-danger);
   color: var(--color-text-light);
 }
 
 .btn-sm {
-  padding: 0.8rem 1.4rem;
-  font-size: 1.6rem;
+  min-height: 3.6rem;
+  padding: 0.75rem 1.2rem;
+  font-size: 1.3rem;
 }
 
 .btn:not(:disabled):hover {
@@ -41,16 +48,19 @@
   box-shadow: var(--shadow-button);
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover:not(:disabled) {
   background-color: var(--color-secondary-bg-hover);
+  border-color: var(--color-border-hover);
 }
 
-.btn-danger:hover {
+.btn-danger:hover:not(:disabled) {
   background-color: var(--color-danger-hover);
+  border-color: var(--color-danger-hover);
 }
 
 .btn:active {
@@ -58,7 +68,7 @@
 }
 
 .btn:disabled {
-  opacity: 0.5;
+  opacity: 0.55;
   transform: none;
   cursor: not-allowed;
   box-shadow: none;
@@ -70,19 +80,24 @@
   justify-content: center;
   flex-wrap: wrap;
 
-  gap: 1.5rem;
+  gap: 1.2rem;
 }
 
 .form-input {
   width: 100%;
-  max-width: 40rem;
+  max-width: 48rem;
+  min-height: 4.6rem;
 
-  padding: 1.2rem 1.6rem;
+  padding: 1rem 1.4rem;
 
-  font-size: 2rem;
+  font-size: 1.6rem;
+  color: var(--color-text-main);
 
+  background-color: var(--color-surface);
   border: 0.1rem solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
+
+  outline: none;
 
   transition:
     background-color var(--transition-fast),
@@ -90,18 +105,71 @@
     border-color var(--transition-fast);
 }
 
+.form-input::placeholder {
+  color: var(--color-text-muted);
+}
+
 .form-input-sm {
-  max-width: 32rem;
+  max-width: 38rem;
+  min-height: 4rem;
 
   padding: 0.8rem 1.2rem;
 
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .form-input:focus {
-  outline: none;
+  background-color: var(--color-surface);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 0.35rem rgba(60, 130, 199, 0.16);
+}
 
-  background-color: rgba(212, 210, 255, 0.4);
-  border-color: rgba(85, 79, 252, 0.74);
-  box-shadow: 0 0 6px rgba(84, 78, 255, 0.35);
+.task-form {
+  width: min(100%, 40rem);
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  margin: 0 auto;
+}
+
+.task-title-input,
+.task-priority-select,
+.task-date-input {
+  max-width: none;
+}
+
+.task-options-row {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.task-priority-select,
+.task-date-input {
+  max-width: none;
+  cursor: pointer;
+}
+
+.task-priority-select {
+  appearance: none;
+
+  padding-right: 3.8rem;
+
+  background:
+    linear-gradient(45deg, transparent 50%, var(--color-text-secondary) 50%),
+    linear-gradient(135deg, var(--color-text-secondary) 50%, transparent 50%),
+    var(--color-surface);
+  background-position:
+    calc(100% - 1.8rem) 50%,
+    calc(100% - 1.3rem) 50%,
+    100% 0;
+  background-size:
+    0.5rem 0.5rem,
+    0.5rem 0.5rem,
+    3rem 100%;
+  background-repeat: no-repeat;
 }

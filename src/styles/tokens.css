@@ -6,34 +6,45 @@
   --color-page-end: #dbeafe;
 
   --color-surface: #ffffff;
-  --color-surface-soft: rgba(255, 255, 255, 0.45);
+  --color-surface-soft: rgba(255, 255, 255, 0.65);
+  --color-surface-blue: rgba(219, 234, 254, 0.75);
 
-  --color-primary: rgba(60, 130, 199, 0.75);
-  --color-primary-hover: rgba(45, 112, 180, 0.9);
+  --color-primary: rgba(60, 130, 199, 0.85);
+  --color-primary-hover: rgba(45, 112, 180, 0.95);
 
   --color-secondary-bg: #ffffff;
   --color-secondary-bg-hover: rgba(220, 235, 248, 0.95);
-  --color-secondary-border: rgba(82, 111, 130, 0.7);
+  --color-secondary-border: rgba(82, 111, 130, 0.55);
 
   --color-danger: rgba(180, 82, 91, 0.9);
   --color-danger-hover: rgba(160, 62, 72, 0.95);
 
-  --color-border: rgba(108, 139, 163, 0.8);
-  --color-border-hover: rgba(96, 139, 180, 0.75);
+  --color-border: rgba(108, 139, 163, 0.5);
+  --color-border-hover: rgba(60, 130, 199, 0.7);
 
   --color-text-main: rgb(13, 30, 61);
   --color-text-secondary: rgb(47, 85, 122);
   --color-text-muted: rgb(103, 132, 156);
-  --color-text-meta: rgb(9, 29, 79);
   --color-text-light: #ffffff;
 
-  --radius-sm: 0.5rem;
+  --color-priority-high-bg: rgba(180, 82, 91, 0.14);
+  --color-priority-high-text: rgba(160, 62, 72, 0.95);
+
+  --color-priority-medium-bg: rgba(60, 130, 199, 0.16);
+  --color-priority-medium-text: rgba(45, 112, 180, 0.95);
+
+  --color-priority-low-bg: rgba(103, 132, 156, 0.16);
+  --color-priority-low-text: rgb(47, 85, 122);
+
+  --radius-sm: 0.65rem;
   --radius-md: 1rem;
+  --radius-lg: 1.35rem;
 
-  --max-content-width: 92rem;
+  --max-content-width: 72rem;
 
-  --shadow-soft: 0 0 6px rgba(0, 0, 0, 0.1);
-  --shadow-button: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-soft: 0 16px 40px rgba(13, 30, 61, 0.08);
+  --shadow-card: 0 8px 24px rgba(13, 30, 61, 0.07);
+  --shadow-button: 0 6px 14px rgba(13, 30, 61, 0.12);
 
-  --transition-fast: 0.3s ease;
+  --transition-fast: 0.2s ease;
 }
