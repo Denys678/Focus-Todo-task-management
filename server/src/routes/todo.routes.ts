@@ -3,8 +3,11 @@ import { createTodo, deleteTodo, getTodoById, getTodos, updateTodo } from "../co
 import { asyncHandler } from "../utils/asyncHandler";
 import { validateRequest } from "../middleware/validate.middleware";
 import { createTodoSchema, todoIdParamsSchema, todoQuerySchema, updatedTodoSchema } from "../schemas/todo.schema";
+import { authenticate } from "../middleware/auth.middleware";
 
 const router = express.Router();
+
+router.use(authenticate);
 
 router.get("/", validateRequest(todoQuerySchema, "query"), asyncHandler(getTodos));
 router.post("/", validateRequest(createTodoSchema, "body"), asyncHandler(createTodo));
