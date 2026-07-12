@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { createTodo, getTodos, deleteTodo, updateTodo } from "../api/todosApi";
 
-export function useTodos() {
+export function useTodos(token) {
   const [text, setText] = useState(() => localStorage.getItem("text") || "");
   const [priority, setPriority] = useState("MEDIUM");
   const [dueDate, setDueDate] = useState("");
@@ -22,6 +22,12 @@ export function useTodos() {
   const [order, setOrder] = useState("desc");
 
   const loadTodos = useCallback(async () => {
+    if (!token) {
+      setList([]);
+      setError(null);
+      return;
+    }
+
     try {
       setIsLoading(true);
       setError(null);
@@ -47,7 +53,7 @@ export function useTodos() {
       query.sortBy = sortBy;
       query.order = order;
 
-      const todos = await getTodos(query);
+      const todos = await getTodos(query, token);
 
       setList(todos);
     } catch (error) {
@@ -55,7 +61,7 @@ export function useTodos() {
     } finally {
       setIsLoading(false);
     }
-  }, [filter, search, priorityFilter, sortBy, order]);
+  }, [token, filter, search, priorityFilter, sortBy, order]);
 
   useEffect(() => {
     loadTodos();
@@ -74,17 +80,24 @@ export function useTodos() {
   };
 
   const addInput = async () => {
+    if (!token) {
+      return;
+    }
+
     try {
       if (!text.trim()) {
         return;
       }
 
       if (isUnique(text.trim(), list)) {
-        await createTodo({
-          title: text.trim(),
-          priority,
-          ...(dueDate ? { dueDate } : {}),
-        });
+        await createTodo(
+          {
+            title: text.trim(),
+            priority,
+            ...(dueDate ? { dueDate } : {}),
+          },
+          token
+        );
 
         setText("");
         setPriority("MEDIUM");
@@ -98,8 +111,12 @@ export function useTodos() {
   };
 
   const deleteItem = async (id) => {
+    if (!token) {
+      return;
+    }
+
     try {
-      await deleteTodo(id);
+      await deleteTodo(id, token);
       await loadTodos();
     } catch (error) {
       setError(error.message);
@@ -107,6 +124,10 @@ export function useTodos() {
   };
 
   const markTaskStatus = async (id) => {
+    if (!token) {
+      return;
+    }
+
     try {
       const currentTodo = list.find((item) => item.id === id);
 
@@ -114,15 +135,20 @@ export function useTodos() {
         return;
       }
 
-      await updateTodo(id, {
-        completed: !currentTodo.completed,
-      });
+      await updateTodo(
+        id,
+        {
+          completed: !currentTodo.completed,
+        },
+        token
+      );
 
       await loadTodos();
     } catch (error) {
       setError(error.message);
     }
   };
+
   const editListItem = (item) => {
     setEditingId(item.id);
     setEditingText(item.title);
@@ -137,16 +163,24 @@ export function useTodos() {
   };
 
   const saveEditItem = async (id) => {
+    if (!token) {
+      return;
+    }
+
     if (!editingText.trim()) {
       return;
     }
 
     try {
-      await updateTodo(id, {
-        title: editingText.trim(),
-        priority: editingPriority,
-        ...(editingDueDate ? { dueDate: editingDueDate } : {}),
-      });
+      await updateTodo(
+        id,
+        {
+          title: editingText.trim(),
+          priority: editingPriority,
+          ...(editingDueDate ? { dueDate: editingDueDate } : {}),
+        },
+        token
+      );
 
       setEditingId(null);
       setEditingText("");
@@ -206,8 +240,10 @@ export function useTodos() {
     editingId,
     editingText,
     setEditingText,
+
     editingPriority,
     setEditingPriority,
+
     editingDueDate,
     setEditingDueDate,
 
@@ -218,6 +254,6 @@ export function useTodos() {
     editListItem,
     saveEditItem,
     cancelEditing,
-    resetFilters
+    resetFilters,
   };
 }
